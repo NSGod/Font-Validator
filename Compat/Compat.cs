@@ -93,13 +93,13 @@ namespace OTFontFile.Rasterizer
 
             TrueType.RasterInterf.UpdateProgressDelegate m_pUpdateProgressDelegate =
                 new TrueType.RasterInterf.UpdateProgressDelegate(pUpdateProgressDelegate);
-            m_DevMetricsData = (DevMetricsData) m_Rasterizer.CalcDevMetrics(Huge_calcHDMX, Huge_calcLTSH, Huge_calcVDMX,
-                                                                            numGlyphs,
-                                                                            phdmxPointSizes, maxHdmxPointSize,
-                                                                            uchPixelHeightRangeStart, uchPixelHeightRangeEnd,
-                                                                            pVDMXxResolution, pVDMXyResolution,
-                                                                            cVDMXResolutions, m_pUpdateProgressDelegate
-                                                                            );
+            m_DevMetricsData = new DevMetricsData ( m_Rasterizer.CalcDevMetrics(Huge_calcHDMX, Huge_calcLTSH, Huge_calcVDMX,
+                                                                                numGlyphs,
+                                                                                phdmxPointSizes, maxHdmxPointSize,
+                                                                                uchPixelHeightRangeStart, uchPixelHeightRangeEnd,
+                                                                                pVDMXxResolution, pVDMXyResolution,
+                                                                                cVDMXResolutions, m_pUpdateProgressDelegate
+                                                                                ) );
             return m_DevMetricsData;
         }
 
@@ -132,9 +132,12 @@ namespace OTFontFile.Rasterizer
 
         public class DevMetricsData : TrueType.RasterInterf.DevMetricsData
         {
-            //public HDMX hdmxData;
-            //public LTSH ltshData;
-            //public VDMX vdmxData;
+            public DevMetricsData ( TrueType.RasterInterf.DevMetricsData obj )
+            {
+                hdmxData = obj.hdmxData;
+                ltshData = obj.ltshData;
+                vdmxData = obj.vdmxData;
+            }
         }
 
         // These structures largely have their OTSPEC meanings,
