@@ -23,6 +23,7 @@
 // SOFTWARE.
 
 using System;
+using System.Reflection;
 using System.Text;
 using OTFontFile;
 using System.IO;
@@ -262,7 +263,19 @@ namespace Compat
                 ASN1 oid = null;
                 ASN1 digest = null;
                 ASN1 obsolete = null;
-                if ( Type.GetType("Mono.Runtime") == null )
+
+                Type type = Type.GetType("Mono.Runtime");
+                String version = null;
+                if (type != null)
+                {
+                    MethodInfo displayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
+                    if (displayName != null)
+                    {
+                        version = (String) displayName.Invoke(null, null);
+                        Console.WriteLine(displayName.Invoke(null, null));
+                    }
+                }
+                if ( type == null || version.StartsWith("5.") || version.StartsWith("6."))
                 {
                     // DotNet is much saner!
                     playload_oid = spc[0][0];
@@ -473,7 +486,19 @@ namespace Compat
                 ASN1 oid = null;
                 ASN1 digest = null;
                 ASN1 obsolete = null;
-                if ( Type.GetType("Mono.Runtime") == null )
+
+                Type type = Type.GetType("Mono.Runtime");
+                String version = null;
+                if (type != null)
+                {
+                    MethodInfo displayName = type.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
+                    if (displayName != null)
+                    {
+                        version = (String) displayName.Invoke(null, null);
+                        Console.WriteLine(displayName.Invoke(null, null));
+                    }
+                }
+                if ( type == null || version.StartsWith("5.") || version.StartsWith("6.") )
                 {
                     // DotNet is much saner!
                     playload_oid = spc[0][0];
