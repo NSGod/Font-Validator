@@ -275,7 +275,8 @@ namespace Compat
                         Console.WriteLine(displayName.Invoke(null, null));
                     }
                 }
-                if ( type == null || version.StartsWith("5.") || version.StartsWith("6."))
+                if ( type == null ||
+                     version.StartsWith("5.18.") || version.StartsWith("5.20.") || version.StartsWith("6."))
                 {
                     // DotNet is much saner!
                     playload_oid = spc[0][0];
@@ -498,7 +499,8 @@ namespace Compat
                         Console.WriteLine(displayName.Invoke(null, null));
                     }
                 }
-                if ( type == null || version.StartsWith("5.") || version.StartsWith("6.") )
+                if ( type == null ||
+                     version.StartsWith("5.18.") || version.StartsWith("5.20.") || version.StartsWith("6."))
                 {
                     // DotNet is much saner!
                     playload_oid = spc[0][0];
